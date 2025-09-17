@@ -3,27 +3,37 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Konferens 2025 – Nedräkning</title>
-    <meta name="description" content="Peppig nedräkning inför vår konferens 2025." />
+    <title>Årets mest färgsprakande dygn – vi ses på Rimforsa!</title>
+    <meta name="description" content="Den 18–19 september: skratt, bad, bastu, god mat och magiskt sällskap – allt utom Excel." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --bg: #0b0f1a;
-        --text: #e6e8ec;
-        --muted: #a6adbb;
-        --accent: #7c5cff;
-        --accent-2: #16b6a3;
+        /* Brand colors */
+        --red-primary: #C43A2E; /* Primär röd (bakgrund) */
+        --red-dark: #A13026;    /* Mörk röd (hover/skugga) */
+        --red-light: #E65A4C;   /* Ljus röd (ytor/gradient) */
+        --white: #FFFFFF;       /* Vit (typografi på rött) */
+        --ink: #1E1E1E;         /* Kolsvart/kolgrå (text på ljus bakgrund) */
+        --warm-gray-bg: #F7F2F1;/* Väldigt ljus varmgrå bakgrundsyta */
+
+        /* Derived tokens */
+        --bg: var(--red-primary);
+        --text: var(--white);
+        --muted: rgba(255,255,255,0.85);
+        --accent: var(--red-primary);
+        --accent-2: var(--red-light);
       }
       * { box-sizing: border-box; }
       html, body { height: 100%; }
       body {
         margin: 0;
         font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-        background: radial-gradient(1200px 800px at 20% 10%, rgba(124,92,255,.25), transparent),
-                    radial-gradient(1000px 600px at 80% 90%, rgba(22,182,163,.25), transparent),
-                    var(--bg);
+        background:
+          radial-gradient(1200px 800px at 20% 10%, rgba(230,90,76,.25), transparent),
+          radial-gradient(1000px 600px at 80% 90%, rgba(196,58,46,.25), transparent),
+          var(--bg);
         color: var(--text);
         display: flex;
         align-items: center;
@@ -33,8 +43,8 @@
       .card {
         width: min(920px, 100%);
         padding: 32px 28px;
-        background: rgba(255,255,255,0.03);
-        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.14);
         border-radius: 16px;
         backdrop-filter: blur(8px);
         box-shadow: 0 10px 30px rgba(0,0,0,.35);
@@ -49,6 +59,10 @@
         margin: 0 0 24px;
         color: var(--muted);
         font-size: clamp(16px, 2.2vw, 20px);
+        background: var(--warm-gray-bg);
+        color: var(--ink);
+        padding: 12px 14px;
+        border-radius: 12px;
       }
       .timer {
         display: grid;
@@ -57,8 +71,8 @@
         margin: 20px 0 8px;
       }
       .unit {
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.18);
         border-radius: 12px;
         padding: 18px 12px;
         text-align: center;
@@ -70,14 +84,17 @@
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
-        color: white;
+        background: var(--red-primary);
+        color: var(--white);
         padding: 12px 18px;
         border-radius: 999px;
         text-decoration: none;
         font-weight: 600;
-        box-shadow: 0 6px 20px rgba(124,92,255,.35);
+        box-shadow: 0 6px 20px rgba(161,48,38,.35);
+        transition: background-color .15s ease, transform .15s ease;
       }
+      .cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+      .cta:active { transform: translateY(0); }
       .subtle { margin-top: 12px; color: var(--muted); font-size: 12px; }
       footer { margin-top: 26px; color: var(--muted); font-size: 12px; }
       .sr-only {
@@ -87,8 +104,8 @@
   </head>
   <body>
     <main class="card" role="main">
-      <h1>Nu laddar vi! Konferensen startar snart 🚀</h1>
-      <p class="lead">Vi drar igång den 18 september 2025 kl 13:00. Tills dess – pepp och energi!</p>
+      <h1>Årets mest färgsprakande dygn – vi ses på Rimforsa!</h1>
+      <p class="lead">Den 18–19 september drar vi till Rimforsa Strand för 20 timmar av skratt, bad, bastu, god mat och magiskt sällskap – allt utom Excel. Vi startar torsdag kl. 13:00 och rundar av efter frukost på fredag. Ta dig dit på eget sätt; behöver du skjuts så löser vi det.</p>
 
       <section class="timer" aria-labelledby="nedrakning">
         <h2 id="nedrakning" class="sr-only">Nedräkning</h2>
@@ -99,7 +116,7 @@
       </section>
 
       <a class="cta" href="#" id="cta">Jag är taggad!</a>
-      <div class="subtle">Spara sidan – nedräkningen tickar vidare i din webbläsare.</div>
+      <div class="subtle">Dresscode: Välj EN färg och gå all in – från topp till tå. Skor, hatt, strumpor, tröja, byxor… kör! Våga neon, våga pop, våga bli kvällens färgblixt – vi fixar resten.</div>
       <footer>© 2025 Konferensteamet</footer>
     </main>
 
