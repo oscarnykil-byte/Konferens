@@ -3,26 +3,56 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Konferens – Nedräkning</title>
+  <title>Årets mest färgsprakande dygn – vi ses på Rimforsa!</title>
   <style>
-    :root { --bg:#0b1220; --fg:#eaf2ff; --muted:#a6b3cc; --accent:#7cc4ff; }
+    :root{
+      --red-primary:#C43A2E; /* Primär röd */
+      --red-dark:#A13026;    /* Hover/skugga */
+      --red-light:#E65A4C;   /* Ljus röd */
+      --white:#FFFFFF;       /* Vit */
+      --ink:#1E1E1E;         /* Kolsvart/kolgrå */
+      --warm-gray-bg:#F7F2F1;/* Ljus varmgrå yta */
+    }
     html,body{height:100%}
-    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; background:linear-gradient(180deg,var(--bg),#101828); color:var(--fg); display:grid; place-items:center}
-    .wrap{text-align:center; padding:32px; max-width:800px}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      background:
+        radial-gradient(1000px 600px at 80% 90%, rgba(230,90,76,.22), transparent),
+        radial-gradient(1200px 800px at 20% 10%, rgba(196,58,46,.22), transparent),
+        var(--red-primary);
+      color:var(--white);
+      display:grid; place-items:center
+    }
+    .wrap{text-align:center; padding:32px; max-width:860px}
     h1{font-size:clamp(28px,6vw,56px); margin:0 0 8px}
-    p.lead{font-size:clamp(16px,3.2vw,22px); color:var(--muted); margin:0 0 28px}
+    p.lead{
+      font-size:clamp(16px,3.2vw,22px);
+      margin:0 0 20px;
+      background:var(--warm-gray-bg);
+      color:var(--ink);
+      padding:12px 14px; border-radius:12px
+    }
     .timer{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin:0 0 24px}
-    .box{min-width:86px; padding:14px 16px; border:1px solid rgba(255,255,255,.14); border-radius:16px; background:rgba(255,255,255,.04); backdrop-filter: blur(6px);}
+    .box{min-width:86px; padding:14px 16px; border:1px solid rgba(255,255,255,.18); border-radius:16px; background:rgba(255,255,255,.08); backdrop-filter: blur(6px);}
     .num{font-weight:700; font-size:clamp(28px,6vw,44px); line-height:1}
-    .lbl{font-size:12px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted)}
-    .cta{margin-top:8px; font-size:14px; color:var(--accent)}
-    footer{position:fixed; bottom:10px; inset-inline:0; text-align:center; font-size:12px; color:#8ea0bf}
+    .lbl{font-size:12px; text-transform:uppercase; letter-spacing:.12em; color:rgba(255,255,255,.9)}
+    .cta{
+      margin-top:12px; font-size:14px;
+      display:inline-block; padding:10px 16px; border-radius:999px;
+      background:var(--red-primary); color:var(--white); text-decoration:none; font-weight:600;
+      box-shadow:0 6px 18px rgba(161,48,38,.35); transition:background-color .15s ease, transform .15s ease
+    }
+    .cta:hover{background:var(--red-dark); transform:translateY(-1px)}
+    .cta:active{transform:translateY(0)}
+    .dress{margin-top:10px; font-size:14px; color:rgba(255,255,255,.92)}
+    footer{position:fixed; bottom:10px; inset-inline:0; text-align:center; font-size:12px; color:rgba(255,255,255,.82)}
   </style>
 </head>
 <body>
   <main class="wrap" role="main">
-    <h1>🚀 Snart smäller det!</h1>
-    <p class="lead">Konferensen drar igång <strong>18 september 2025 kl 13:00</strong>. Häng med i peppen tills start! ✨</p>
+    <h1>Årets mest färgsprakande dygn – vi ses på Rimforsa!</h1>
+    <p class="lead">Den 18–19 september drar vi till Rimforsa Strand för 20 timmar av skratt, bad, bastu, god mat och magiskt sällskap – allt utom Excel. Vi startar torsdag kl. 13:00 och rundar av efter frukost på fredag. Ta dig dit på eget sätt; behöver du skjuts så löser vi det.</p>
 
     <div id="countdown" class="timer" aria-live="polite" aria-atomic="true">
       <div class="box"><div class="num" id="d">–</div><div class="lbl">Dagar</div></div>
@@ -31,7 +61,8 @@
       <div class="box"><div class="num" id="s">–</div><div class="lbl">Sekunder</div></div>
     </div>
 
-    <p id="msg" class="cta">Vi räknar ner… ses där! 💙</p>
+    <a id="msg" class="cta" href="#">Jag är taggad!</a>
+    <p class="dress">Dresscode: Välj EN färg och gå all in – från topp till tå. Skor, hatt, strumpor, tröja, byxor… kör! Våga neon, våga pop, våga bli kvällens färgblixt – vi fixar resten.</p>
   </main>
   <footer>© 2025 Ditt företag</footer>
 
