@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Årets mest färgsprakande dygn – vi ses på Rimforsa!</title>
+  <title>Mpya Öst konferens 18/9!</title>
   <style>
     :root{
       --red-primary:#C43A2E; /* Primär röd */
@@ -38,8 +38,8 @@
     .num{font-weight:700; font-size:clamp(28px,6vw,44px); line-height:1}
     .lbl{font-size:12px; text-transform:uppercase; letter-spacing:.12em; color:rgba(255,255,255,.9)}
     .cta{
-      margin-top:12px; font-size:14px;
-      display:inline-block; padding:10px 16px; border-radius:999px;
+      margin-top:16px; font-size:clamp(18px, 3.5vw, 28px);
+      display:inline-block; padding:16px 28px; border-radius:999px;
       background:var(--red-primary); color:var(--white); text-decoration:none; font-weight:600;
       box-shadow:0 6px 18px rgba(161,48,38,.35); transition:background-color .15s ease, transform .15s ease
     }
@@ -51,8 +51,7 @@
 </head>
 <body>
   <main class="wrap" role="main">
-    <h1>Årets mest färgsprakande dygn – vi ses på Rimforsa!</h1>
-    <p class="lead">Den 18–19 september drar vi till Rimforsa Strand för 20 timmar av skratt, bad, bastu, god mat och magiskt sällskap – allt utom Excel. Vi startar torsdag kl. 13:00 och rundar av efter frukost på fredag. Ta dig dit på eget sätt; behöver du skjuts så löser vi det.</p>
+    <h1>Mpya Öst konferens 18/9!</h1>
 
     <div id="countdown" class="timer" aria-live="polite" aria-atomic="true">
       <div class="box"><div class="num" id="d">–</div><div class="lbl">Dagar</div></div>
@@ -61,10 +60,9 @@
       <div class="box"><div class="num" id="s">–</div><div class="lbl">Sekunder</div></div>
     </div>
 
-    <a id="msg" class="cta" href="#">Jag är taggad!</a>
-    <p class="dress">Dresscode: Välj EN färg och gå all in – från topp till tå. Skor, hatt, strumpor, tröja, byxor… kör! Våga neon, våga pop, våga bli kvällens färgblixt – vi fixar resten.</p>
+    <a id="msg" class="cta" href="#">ÄR DU TAGGAD?</a>
   </main>
-  <footer>© 2025 Ditt företag</footer>
+  <canvas id="confetti2" style="position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:999" aria-hidden="true"></canvas>
 
   <script>
     // Ställ in mål-tid i svensk tidzon (CEST den 18 sep 2025)
@@ -100,6 +98,113 @@
 
     tick();
     const iv = setInterval(tick, 1000);
+  </script>
+  <script>
+    (function(){
+      const btn = document.getElementById('msg');
+      const canvas = document.getElementById('confetti2');
+      const ctx = canvas.getContext('2d', { alpha: true });
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+      function resize(){
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const particles = [];
+      let raf = null;
+      const gravity = 0.35;
+      const drag = 0.992;
+
+      function color(){
+        const hues = [0,30,60,120,180,240,300];
+        const h = hues[Math.floor(Math.random()*hues.length)];
+        return `hsl(${h},100%,50%)`;
+      }
+
+      function burst(x,y,count,power){
+        for(let i=0;i<count;i++){
+          const ang = Math.random()*Math.PI*2;
+          const spd = (Math.random()*0.6+0.4)*(power||12);
+          particles.push({
+            x,y,
+            vx: Math.cos(ang)*spd,
+            vy: Math.sin(ang)*spd - (power||12)*0.6,
+            size: Math.random()*8+4,
+            rot: Math.random()*Math.PI*2,
+            rotSpd: (Math.random()-0.5)*0.2,
+            color: color(),
+            shape: Math.random()<0.5 ? 'rect' : 'circle',
+            life: 0,
+            ttl: 600 + Math.random()*600
+          });
+        }
+      }
+
+      function draw(){
+        const cw = canvas.width/dpr;
+        const ch = canvas.height/dpr;
+        if(!particles.length){
+          if(raf) cancelAnimationFrame(raf);
+          raf = null;
+          ctx.clearRect(0,0,cw,ch);
+          return;
+        }
+        raf = requestAnimationFrame(draw);
+        ctx.clearRect(0,0,cw,ch);
+        for(let i=particles.length-1;i>=0;i--){
+          const p = particles[i];
+          p.vx *= drag;
+          p.vy = p.vy*drag + gravity;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.rotSpd;
+          p.life++;
+          if(p.y - p.size > ch || p.life > p.ttl){
+            particles.splice(i,1);
+            continue;
+          }
+          ctx.save();
+          ctx.translate(p.x,p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          if(p.shape==='rect'){
+            ctx.fillRect(-p.size, -p.size*0.5, p.size*2, p.size);
+          }else{
+            ctx.beginPath();
+            ctx.arc(0,0,p.size,0,Math.PI*2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      }
+
+      function fire(){
+        const cw = canvas.width/dpr;
+        const ch = canvas.height/dpr;
+        const bursts = 6;
+        for(let i=0;i<bursts;i++){
+          setTimeout(()=>{
+            burst(cw*0.2, ch*0.1, 180, 18);
+            burst(cw*0.8, ch*0.1, 180, 18);
+            burst(cw*Math.random(), ch*0.2, 220, 16);
+          }, i*180);
+        }
+        if(!raf) raf = requestAnimationFrame(draw);
+      }
+
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        fire();
+      });
+    })();
   </script>
 </body>
 </html>
